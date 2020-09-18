@@ -1,16 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Failed suite [Suite]">
-  <test name="Test(failed)">
+<suite thread-count="1" name="Failed suite [Suite]" parallel="classes">
+  <parameter name="browser" value="edge"/>
+  <test name="Chrome test(failed)" parallel="classes">
     <classes>
       <class name="Report_Package.Report_Runner">
         <methods>
           <include name="setUpClass"/>
+          <include name="setUpClass"/>
           <include name="feature" invocation-numbers="0"/>
           <include name="writeExtentReport"/>
+          <include name="writeExtentReport"/>
+          <include name="beforeSuite"/>
+          <include name="beforeSuite"/>
+          <include name="tearDownClass"/>
           <include name="tearDownClass"/>
         </methods>
       </class> <!-- Report_Package.Report_Runner -->
     </classes>
-  </test> <!-- Test(failed) -->
+  </test> <!-- Chrome test(failed) -->
+  <test name="Edge test(failed)" parallel="classes">
+    <classes>
+      <class name="Report_Package.Report_Runner">
+        <methods>
+          <include name="setUpClass"/>
+          <include name="setUpClass"/>
+          <include name="feature" invocation-numbers="0"/>
+          <include name="writeExtentReport"/>
+          <include name="writeExtentReport"/>
+          <include name="beforeSuite"/>
+          <include name="beforeSuite"/>
+          <include name="tearDownClass"/>
+          <include name="tearDownClass"/>
+        </methods>
+      </class> <!-- Report_Package.Report_Runner -->
+    </classes>
+  </test> <!-- Edge test(failed) -->
 </suite> <!-- Failed suite [Suite] -->

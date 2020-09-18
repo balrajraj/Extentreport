@@ -2,15 +2,28 @@ package Report_Package;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Parameters;
+
 import com.cucumber.listener.Reporter;
 import com.google.common.io.Files;
 import cucumber.api.Scenario;
@@ -21,19 +34,48 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-public class Report_Stepdefination {
+public class Report_Stepdefination{
 	
+    
 	WebDriver driver;
+    
+     
+	   
+    @Given("^user is on google form$")
+	public void user_is_on_google_form() throws MalformedURLException{
+		
+	System.out.println("User is on Main form");	
+		 
+	if(Report_Runner.browser.equalsIgnoreCase("chrome")){
+		   
+		   WebDriverManager.chromedriver().setup();
+		   driver = new ChromeDriver();
+		   driver.get("https://www.google.com/");
+	   }else{
+		  		   
+		   WebDriverManager.edgedriver().setup();
+		   driver = new EdgeDriver();
+		   driver.get("https://www.google.com/");
+	   }
+}	
+
 	
-	@Given("^user is on google form$")
-	public void user_is_on_google_form(){
+	
 		
-		WebDriverManager.chromedriver().setup();
 		
-		driver = new ChromeDriver();
-		
-		driver.get("https://www.google.com/");
-	}
+//		//Linux code
+//		WebDriverManager.chromedriver().setup();
+//		
+//		DesiredCapabilities cap = new DesiredCapabilities();
+//		
+//		cap.setBrowserName("chrome");
+//		driver = new RemoteWebDriver(new URL("http://52.15.255.62:4444/wd/hub"),cap);
+//				
+//								
+//		driver = new ChromeDriver();
+//		
+//		driver.get("https://www.google.com/");
+	//}
 	
 	@When("^user types on the form$")
 	public void user_types_on_the_form(){
@@ -43,7 +85,7 @@ public class Report_Stepdefination {
 	
 	@Then("^user validates the page title$")
 	public void user_validates_the_page_title(){
-		String expectedTitle = "Gogle";
+		String expectedTitle = "Google";
 		
 		String actualTitle = driver.getTitle();
 		
